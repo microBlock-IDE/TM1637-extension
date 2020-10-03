@@ -36,7 +36,7 @@ Blockly.Python['tm1637_temperature'] = function(block) {
 
   var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 
-  var code = `tm.temperature(int(${value_value}))\n`;
+  var code = `tm.temperature(${value_value})\n`;
   return code;
 };
 

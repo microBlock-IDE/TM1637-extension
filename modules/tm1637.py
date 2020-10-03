@@ -1,18 +1,16 @@
 from machine import Pin
 from time import sleep_us, sleep_ms
 
-TM1637_CMD1 = const(64)  # 0x40 data command
-TM1637_CMD2 = const(192) # 0xC0 address command
-TM1637_CMD3 = const(128) # 0x80 display control command
-TM1637_DSP_ON = const(8) # 0x08 display on
-TM1637_DELAY = const(10) # 10us delay between clk/dio pulses
-TM1637_MSB = const(128)  # msb is the decimal point or the colon depending on your display
+TM1637_CMD1 = const(64)
+TM1637_CMD2 = const(192)
+TM1637_CMD3 = const(128)
+TM1637_DSP_ON = const(8)
+TM1637_DELAY = const(10)
+TM1637_MSB = const(128)
 
-# 0-9, a-z, blank, dash, star
 _SEGMENTS = bytearray(b'\x3F\x06\x5B\x4F\x66\x6D\x7D\x07\x7F\x6F\x77\x7C\x39\x5E\x79\x71\x3D\x76\x06\x1E\x76\x38\x55\x54\x3F\x73\x67\x50\x6D\x78\x3E\x1C\x2A\x76\x6E\x5B\x00\x40\x63')
 
 class TM1637(object):
-    """Library for quad 7-segment LED modules based on the TM1637 LED driver."""
     def __init__(self, clk, dio, brightness=7):
         self.clk = clk
         self.dio = dio
@@ -42,13 +40,11 @@ class TM1637(object):
         self.dio(1)
 
     def _write_data_cmd(self):
-        # automatic address increment, normal mode
         self._start()
         self._write_byte(TM1637_CMD1)
         self._stop()
 
     def _write_dsp_ctrl(self):
-        # display on, set brightness
         self._start()
         self._write_byte(TM1637_CMD3 | TM1637_DSP_ON | self._brightness)
         self._stop()
@@ -69,9 +65,6 @@ class TM1637(object):
         sleep_us(TM1637_DELAY)
 
     def brightness(self, val=None):
-        """Set the display brightness 0-7."""
-        # brightness 0 = 1/16th pulse width
-        # brightness 7 = 14/16th pulse width
         if val is None:
             return self._brightness
         if not 0 <= val <= 7:
@@ -82,9 +75,6 @@ class TM1637(object):
         self._write_dsp_ctrl()
 
     def write(self, segments, pos=0):
-        """Display up to 6 segments moving right from a given position.
-        The MSB in the 2nd segment controls the colon between the 2nd
-        and 3rd segments."""
         if not 0 <= pos <= 5:
             raise ValueError("Position out of range")
         self._write_data_cmd()
@@ -97,20 +87,15 @@ class TM1637(object):
         self._write_dsp_ctrl()
 
     def encode_digit(self, digit):
-        """Convert a character 0-9, a-f to a segment."""
         return _SEGMENTS[digit & 0x0f]
 
     def encode_string(self, string):
-        """Convert an up to 4 character length string containing 0-9, a-z,
-        space, dash, star to an array of segments, matching the length of the
-        source string."""
         segments = bytearray(len(string))
         for i in range(len(string)):
             segments[i] = self.encode_char(string[i])
         return segments
 
     def encode_char(self, char):
-        """Convert a character 0-9, a-z, space, dash or star to a segment."""
         o = ord(char)
         if o == 32:
             return _SEGMENTS[36] # space
@@ -127,6 +112,7 @@ class TM1637(object):
         raise ValueError("Character out of range: {:d} '{:s}'".format(o, chr(o)))
 
     def temperature(self, num):
+        num = int(num)
         if num < -9:
             self.show('lo') # low
         elif num > 99:
@@ -137,12 +123,14 @@ class TM1637(object):
         self.write([_SEGMENTS[38], _SEGMENTS[12]], 2) # degrees C
 
     def show(self, string, colon=False):
+        string = int(string) if isinstance(10.25, (float, int)) else string
         segments = self.encode_string(string)
         if len(segments) > 1 and colon:
             segments[1] |= 128
         self.write(segments[:4])
 
     def scroll(self, string, delay=250):
+        string = int(string) if isinstance(10.25, (float, int)) else string
         segments = string if isinstance(string, list) else self.encode_string(string)
         data = [0] * 8
         data[4:0] = list(segments)
