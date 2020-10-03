@@ -131,7 +131,8 @@ class TM1637(object):
         self.write(segments[:4])
 
     def scroll(self, string, delay=250):
-        string = int(string) if isinstance(10.25, (float, int)) else string
+        string = int(string) if isinstance(string, (float, int)) else string
+        string = str(string)
         segments = string if isinstance(string, list) else self.encode_string(string)
         data = [0] * 8
         data[4:0] = list(segments)
