@@ -125,7 +125,6 @@ class TM1637(object):
     def show(self, string, colon=False):
         string = int(string) if isinstance(string, (float, int)) else string
         string = '{:>4}'.format(string)
-        print(string)
         segments = self.encode_string(string)
         if len(segments) > 1 and colon:
             segments[1] |= 128
