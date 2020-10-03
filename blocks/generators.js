@@ -16,7 +16,7 @@ Blockly.Python['tm1637_show'] = function(block) {
   var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
   var dropdown_colon = block.getFieldValue('colon');
 
-  var code = `tm.show(str(${value_value}), colon=${dropdown_colon})\n`;
+  var code = `tm.show('{:>4}'.format(${value_value}), colon=${dropdown_colon})\n`;
   return code;
 };
 
