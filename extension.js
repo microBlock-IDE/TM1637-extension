@@ -10,8 +10,8 @@
         {
             xml: `
                 <block type="tm1637_setup">
-                    <value name="clk">26</value>
-                    <value name="dio">27</value>
+                    <field name="clk">26</field>
+                    <field name="dio">27</field>
                 </block>
             `
         },
