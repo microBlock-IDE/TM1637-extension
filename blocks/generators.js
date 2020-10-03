@@ -19,3 +19,45 @@ Blockly.Python['tm1637_show'] = function(block) {
   var code = `tm.show(str(${value_value}), colon=${dropdown_colon})\n`;
   return code;
 };
+
+Blockly.Python['tm1637_scroll'] = function(block) {
+  Blockly.Python.definitions_['import_tm1637'] = 'import tm1637';
+  Blockly.Python.definitions_['from_machine_import_pin'] = 'from machine import Pin';
+
+  var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+
+  var code = `tm.scroll(str(${value_value}), delay=100)\n`;
+  return code;
+};
+
+Blockly.Python['tm1637_temperature'] = function(block) {
+  Blockly.Python.definitions_['import_tm1637'] = 'import tm1637';
+  Blockly.Python.definitions_['from_machine_import_pin'] = 'from machine import Pin';
+
+  var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+
+  var code = `tm.temperature(${value_value})\n`;
+  return code;
+};
+
+Blockly.Python['tm1637_time'] = function(block) {
+  Blockly.Python.definitions_['import_tm1637'] = 'import tm1637';
+  Blockly.Python.definitions_['from_machine_import_pin'] = 'from machine import Pin';
+
+  var value_value1 = Blockly.Python.valueToCode(block, 'value1', Blockly.Python.ORDER_ATOMIC);
+  var value_value2 = Blockly.Python.valueToCode(block, 'value2', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_colon = block.getFieldValue('colon');
+
+  var code = `tm.show('{:>2d}{:02d}'.format(${value_value1}, ${value_value2}), colon=${dropdown_colon})\n`;
+  return code;
+};
+
+Blockly.Python['tm1637_set_brightness'] = function(block) {
+  Blockly.Python.definitions_['import_tm1637'] = 'import tm1637';
+  Blockly.Python.definitions_['from_machine_import_pin'] = 'from machine import Pin';
+
+  var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+
+  var code = `tm.brightness(${value_value})\n`;
+  return code;
+};

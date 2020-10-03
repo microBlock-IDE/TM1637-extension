@@ -25,6 +25,55 @@
                     </value>
                 </block>
             `
+        },
+        {
+            xml: `
+                <block type="tm1637_scroll">
+                    <value name="value">
+                        <shadow type="text">
+                            <field name="TEXT">Hello</field>
+                        </shadow>
+                    </value>
+                </block>
+            `
+        },
+        {
+            xml: `
+                <block type="tm1637_temperature">
+                    <value name="value">
+                        <shadow type="math_number">
+                            <field name="NUM">25</field>
+                        </shadow>
+                    </value>
+                </block>
+            `
+        },
+        {
+            xml: `
+                <block type="tm1637_time">
+                    <value name="value1">
+                        <shadow type="math_number">
+                            <field name="NUM">18</field>
+                        </shadow>
+                    </value>
+                    <value name="value2">
+                        <shadow type="math_number">
+                            <field name="NUM">6</field>
+                        </shadow>
+                    </value>
+                </block>
+            `
+        },
+        {
+            xml: `
+                <block type="tm1637_set_brightness">
+                    <value name="value">
+                        <shadow type="math_number">
+                            <field name="NUM">7</field>
+                        </shadow>
+                    </value>
+                </block>
+            `
         }
     ]
 });
