@@ -26,7 +26,7 @@ Blockly.Python['tm1637_scroll'] = function(block) {
 
   var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 
-  var code = `tm.scroll(${value_value}, delay=100)\n`;
+  var code = `tm.scroll(${value_value}, delay=150)\n`;
   return code;
 };
 
