@@ -17,7 +17,7 @@
         },
         {
             xml: `
-                <block type="tm1637_show_number">
+                <block type="tm1637_show">
                     <value name="value">
                         <shadow type="text">
                             <field name="TEXT">1234</field>
