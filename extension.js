@@ -1,7 +1,7 @@
 ({
     name: "TM1673", // Category Name
     description: "Show number on TM1673",
-    author: "microBlock",
+    author: "IOXhop.com",
     category: "Display",
     version: "1.0.0",
     icon: "/static/icon.png", // Category icon
