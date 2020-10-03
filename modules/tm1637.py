@@ -123,7 +123,7 @@ class TM1637(object):
         self.write([_SEGMENTS[38], _SEGMENTS[12]], 2) # degrees C
 
     def show(self, string, colon=False):
-        string = int(string) if isinstance(10.25, (float, int)) else string
+        string = int(string) if isinstance(string, (float, int)) else string
         segments = self.encode_string(string)
         if len(segments) > 1 and colon:
             segments[1] |= 128
