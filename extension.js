@@ -1,6 +1,6 @@
 ({
-    name: "TM1673", // Category Name
-    description: "Show number on TM1673",
+    name: "TM1637", // Category Name
+    description: "Show number on TM1637",
     author: "IOXhop.com",
     category: "Display",
     version: "1.0.0",
